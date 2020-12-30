@@ -9,6 +9,8 @@ namespace EmployeePyrolls
             Console.WriteLine("Welcome To the Employee Payrolls");
             EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
             employeePayrollRepo.checkConnection();
+            int count=employeePayrollRepo.getAllEmployee();
+            Console.WriteLine(count);
         }
     }
 }
