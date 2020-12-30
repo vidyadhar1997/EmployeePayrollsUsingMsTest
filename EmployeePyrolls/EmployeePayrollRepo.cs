@@ -78,5 +78,48 @@ namespace EmployeePyrolls
                 this.sqlConnection.Close();
             }
         }
+
+        /// <summary>
+        /// Adds the employee.
+        /// </summary>
+        /// <param name="employeeModel">The employee model.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception"></exception>
+        public int addEmployee()
+        {
+            EmployeeModel employeeModel = new EmployeeModel();
+            try
+            {
+                using (this.sqlConnection)
+                {
+                    string query = @"update EmplyeePayroll set employeeSalary=3000000 where EmployeeName='dhiraj';";
+                    SqlCommand cmd = new SqlCommand(query, this.sqlConnection);
+                    this.sqlConnection.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    if (result == 1)
+                    {
+                        query = @"Select employeeSalary from EmplyeePayroll where EmployeeName='dhiraj';";
+                        cmd = new SqlCommand(query, sqlConnection);
+                        object res = cmd.ExecuteScalar();
+                        sqlConnection.Close();
+                        employeeModel.EmployeeSalary = (int)res;
+                        return (employeeModel.EmployeeSalary);
+                    }
+                    else
+                    {
+                        sqlConnection.Close();
+                        return 0;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.sqlConnection.Close();
+            }
+        }
     }
 }
