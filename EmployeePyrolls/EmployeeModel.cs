@@ -12,5 +12,6 @@ namespace EmployeePyrolls
         public string Month { get; set; }
         public int EmployeeSalary { get; set; }
         public int SalaryId { get; set; }
+        public DateTime StartDate { get; set; }
     }
 }

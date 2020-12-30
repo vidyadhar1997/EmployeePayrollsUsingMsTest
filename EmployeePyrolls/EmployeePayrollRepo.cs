@@ -56,7 +56,8 @@ namespace EmployeePyrolls
                             employeeModel.Month = sqlDataReader.GetString(3);
                             employeeModel.EmployeeSalary = sqlDataReader.GetInt32(4);
                             employeeModel.SalaryId = sqlDataReader.GetInt32(5);
-                            Console.WriteLine("{0},{1},{2},{3},{4},{5}", employeeModel.EmployeeId, employeeModel.EmployeeName, employeeModel.JobDescription, employeeModel.Month, employeeModel.EmployeeSalary, employeeModel.SalaryId);
+                            employeeModel.StartDate = sqlDataReader.GetDateTime(6);
+                            Console.WriteLine("{0},{1},{2},{3},{4},{5},{6}", employeeModel.EmployeeId, employeeModel.EmployeeName, employeeModel.JobDescription, employeeModel.Month, employeeModel.EmployeeSalary, employeeModel.SalaryId,employeeModel.StartDate);
                             Console.WriteLine("\n");
                         }
                     }
@@ -85,7 +86,7 @@ namespace EmployeePyrolls
         /// <param name="employeeModel">The employee model.</param>
         /// <returns></returns>
         /// <exception cref="System.Exception"></exception>
-        public int addEmployee()
+        public int updateEmployee()
         {
             EmployeeModel employeeModel = new EmployeeModel();
             try
@@ -110,6 +111,49 @@ namespace EmployeePyrolls
                         sqlConnection.Close();
                         return 0;
                     }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.sqlConnection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Gets the employee data with given range.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.Exception"></exception>
+        public int getEmployeeDataWithGivenRange()
+        {
+            try
+            {
+                int count = 0;
+                EmployeeModel employeeModel = new EmployeeModel();
+                using (this.sqlConnection)
+                {
+                    string query = @"select count(EmployeeName) from EmplyeePayroll where StartDate between cast('2010-01-01' as date) and CAST('2020-01-01' as date)";
+                    SqlCommand cmd = new SqlCommand(query, this.sqlConnection);
+                    this.sqlConnection.Open();
+                    SqlDataReader sqlDataReader= cmd.ExecuteReader();
+                    if (sqlDataReader.HasRows)
+                    {
+                        while (sqlDataReader.Read())
+                        {
+                             count = sqlDataReader.GetInt32(0);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No Data Found");
+                    }
+                    sqlDataReader.Close();
+                    this.sqlConnection.Close();
+                    return count;
                 }
             }
             catch (Exception e)

@@ -26,7 +26,19 @@ namespace EmployeePayrollTest
         {
             int expected = 3000000;
             EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
-            int count = employeePayrollRepo.addEmployee();
+            int count = employeePayrollRepo.updateEmployee();
+            Assert.AreEqual(expected, count);
+        }
+        
+        /// <summary>
+        /// Givens the employee name when update salary then return employee payroll from data base.
+        /// </summary>
+        [TestMethod]
+        public void GivenEmployeeNames_WhenUpdateSalary_ThenReturnExpectedSalary()
+        {
+            int expected =2;
+            EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
+            int count = employeePayrollRepo.getEmployeeDataWithGivenRange();
             Assert.AreEqual(expected, count);
         }
     }
