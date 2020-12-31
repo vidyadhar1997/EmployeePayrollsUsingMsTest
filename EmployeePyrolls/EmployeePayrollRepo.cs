@@ -348,7 +348,13 @@ namespace EmployeePyrolls
                 throw new Exception(e.Message);
             }
         }
-        
+
+        /// <summary>
+        /// Adds the employee.
+        /// </summary>
+        /// <param name="employeeModel">The employee model.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public bool addEmployee(EmployeeModel employeeModel)
         {
             try
@@ -383,6 +389,63 @@ namespace EmployeePyrolls
             {
                 this.sqlConnection.Close();
             }
+        }
+
+        /// <summary>
+        /// Adds the employee to payroll.
+        /// </summary>
+        /// <param name="employeeModel">The employee model.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public bool addEmployeeToPayroll(EmployeeModel employeeModel)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SpAddEmployeePayrollDetails", this.sqlConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@EmployeeID", employeeModel.EmployeeId);
+                cmd.Parameters.AddWithValue("@EmployeeName", employeeModel.EmployeeName);
+                cmd.Parameters.AddWithValue("@JobDescription", employeeModel.JobDescription);
+                cmd.Parameters.AddWithValue("@Month", employeeModel.Month);
+                cmd.Parameters.AddWithValue("@EmployeeSalary", employeeModel.EmployeeSalary);
+                cmd.Parameters.AddWithValue("@SalaryId", employeeModel.SalaryId);
+                cmd.Parameters.AddWithValue("@StartDate", employeeModel.StartDate);
+                cmd.Parameters.AddWithValue("@Gender", employeeModel.Gender);
+                this.sqlConnection.Open();
+                cmd.ExecuteNonQuery();
+                this.sqlConnection.Close();
+
+                int employee_id = employeeModel.EmployeeId;
+                double deduction = employeeModel.EmployeeSalary * 0.2;
+                double taxable_pay = employeeModel.EmployeeSalary - deduction;
+                double tax = taxable_pay * 0.1;
+                double net_pay = employeeModel.EmployeeSalary - tax;
+                SqlCommand sqlCommand = new SqlCommand("AddIntoPayrollDetailss", this.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@EmployeeId", (employeeModel.EmployeeId));
+                sqlCommand.Parameters.AddWithValue("@Deduction", (employeeModel.EmployeeSalary*0.2));
+                sqlCommand.Parameters.AddWithValue("@TaxablePay", (employeeModel.EmployeeSalary - deduction));
+                sqlCommand.Parameters.AddWithValue("@Tax", (taxable_pay*0.1));
+                sqlCommand.Parameters.AddWithValue("@NetPay", (employeeModel.EmployeeSalary - tax));
+                this.sqlConnection.Open();
+                var result = sqlCommand.ExecuteNonQuery();
+                this.sqlConnection.Close();
+                if (result != 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            finally
+            {
+                this.sqlConnection.Close();
+            }
+
         }
     }
 }

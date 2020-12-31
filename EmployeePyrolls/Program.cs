@@ -8,15 +8,15 @@ namespace EmployeePyrolls
         {
             EmployeePayrollRepo employeeRepo = new EmployeePayrollRepo();
             EmployeeModel employeeModel = new EmployeeModel();
-            employeeModel.EmployeeId = 1;
+            employeeModel.EmployeeId = 67;
             employeeModel.EmployeeName = "Prem";
             employeeModel.JobDescription = "Mech";
             employeeModel.Month = "Feb";
             employeeModel.EmployeeSalary = 25000;
-            employeeModel.SalaryId = 404;
+            employeeModel.SalaryId = 504;
             employeeModel.StartDate = new DateTime(2015,09,12);
             employeeModel.Gender = 'M';
-            employeeRepo.addEmployee(employeeModel);
+            employeeRepo.addEmployeeToPayroll(employeeModel);
         }
     }
 }
