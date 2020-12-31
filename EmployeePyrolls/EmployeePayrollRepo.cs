@@ -348,5 +348,41 @@ namespace EmployeePyrolls
                 throw new Exception(e.Message);
             }
         }
+        
+        public bool addEmployee(EmployeeModel employeeModel)
+        {
+            try
+            {
+                using (this.sqlConnection)
+                {
+                    SqlCommand cmd = new SqlCommand("SpAddEmployeePayrollDetails", this.sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EmployeeID", employeeModel.EmployeeId);
+                    cmd.Parameters.AddWithValue("@EmployeeName", employeeModel.EmployeeName);
+                    cmd.Parameters.AddWithValue("@JobDescription", employeeModel.JobDescription);
+                    cmd.Parameters.AddWithValue("@Month", employeeModel.Month);
+                    cmd.Parameters.AddWithValue("@EmployeeSalary", employeeModel.EmployeeSalary);
+                    cmd.Parameters.AddWithValue("@SalaryId", employeeModel.SalaryId);
+                    cmd.Parameters.AddWithValue("@StartDate", employeeModel.StartDate);
+                    cmd.Parameters.AddWithValue("@Gender", employeeModel.Gender);
+                    this.sqlConnection.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    this.sqlConnection.Close();
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.sqlConnection.Close();
+            }
+        }
     }
 }

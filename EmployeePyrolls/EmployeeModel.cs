@@ -13,5 +13,6 @@ namespace EmployeePyrolls
         public int EmployeeSalary { get; set; }
         public int SalaryId { get; set; }
         public DateTime StartDate { get; set; }
-    }
+        public char Gender { get; set; }
+}
 }

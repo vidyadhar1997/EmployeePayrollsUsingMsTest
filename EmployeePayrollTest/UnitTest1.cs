@@ -1,5 +1,6 @@
 using EmployeePyrolls;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace EmployeePayrollTest
 {
@@ -100,6 +101,29 @@ namespace EmployeePayrollTest
             EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
             int count = employeePayrollRepo.getCountSalary();
             Assert.AreEqual(expected, count);
+        }
+        
+        /// <summary>
+        /// Givens the employee names when count by salary then return expected count by salary.
+        /// </summary>
+        [TestMethod]
+        public void GivenEmployeeNamess_WhenCountBySalary_ThenReturnExpectedCountBySalary()
+        {
+            bool expected = true;
+            EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
+            EmployeeModel model = new EmployeeModel
+            {
+                EmployeeId = 5,
+                EmployeeName = "Prem",
+                JobDescription = "Mech",
+                Month = "Feb",
+                EmployeeSalary = 25000,
+                SalaryId = 404,
+                StartDate = new DateTime(2015,09,12),
+                Gender = 'M'
+            };
+            bool result = employeePayrollRepo.addEmployee(model);
+            Assert.AreEqual(expected, result);
         }
     }
 }
