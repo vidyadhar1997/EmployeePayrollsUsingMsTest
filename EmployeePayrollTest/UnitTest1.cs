@@ -130,7 +130,7 @@ namespace EmployeePayrollTest
         /// Given Employee Payroll When Add New Employee Then should Return Expected Result
         /// </summary>
         [TestMethod]
-        public void GivenEmployeePayroll_WhenAddInTable_ThenshouldReturnExpectedResult()
+        public void GivenEmployeePayroll_WhenAddInTable_ThenshouldReturnExpectedResults()
         {
             bool expected = true;
             EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
