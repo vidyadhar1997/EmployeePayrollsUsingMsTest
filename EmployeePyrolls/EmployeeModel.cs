@@ -14,5 +14,7 @@ namespace EmployeePyrolls
         public int SalaryId { get; set; }
         public DateTime StartDate { get; set; }
         public char Gender { get; set; }
+        public int DepartmentId { get; set; }
+        public int CompanyId { get; set; }
 }
 }

@@ -411,6 +411,8 @@ namespace EmployeePyrolls
                 cmd.Parameters.AddWithValue("@SalaryId", employeeModel.SalaryId);
                 cmd.Parameters.AddWithValue("@StartDate", employeeModel.StartDate);
                 cmd.Parameters.AddWithValue("@Gender", employeeModel.Gender);
+                cmd.Parameters.AddWithValue("@DepartmentId", employeeModel.DepartmentId);
+                cmd.Parameters.AddWithValue("@CompanyId", employeeModel.CompanyId);
                 this.sqlConnection.Open();
                 cmd.ExecuteNonQuery();
                 this.sqlConnection.Close();
@@ -445,7 +447,16 @@ namespace EmployeePyrolls
             {
                 this.sqlConnection.Close();
             }
-
         }
+        /*public bool DeleteDataFromTable()
+        {
+            using (this.sqlConnection)
+            {
+                string query = @"delete from EmplyeePayroll where id=3;";
+                SqlCommand cmd = new SqlCommand(query, this.sqlConnection);
+                int numberOfRowAffected=cmd.ExecuteNonQuery();
+
+            }
+        }*/
     }
 }
