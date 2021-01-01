@@ -173,9 +173,9 @@ namespace EmployeePayrollTest
             bool result = employeePayrollRepo.addEmployeeToPayroll(model);
             Assert.AreEqual(expected, result);
         }
-        
+
         /// <summary>
-        /// UC10 Givens the employee payroll when retrieve then return employee payroll from data base.
+        /// UC10 Given Query When Insert Then should Perform Retrival Operation.
         /// </summary>
         [TestMethod]
         public void GivenQuery_WhenInsert_ThenshouldPerformRetrivalOperation()
@@ -187,7 +187,7 @@ namespace EmployeePayrollTest
         }
 
         /// <summary>
-        /// UC10 Givens the employee name when update salary then return expected salary.
+        /// UC10 Given Query When Insert Then should Perform Update Operation.
         /// </summary>
         [TestMethod]
         public void GivenQuery_WhenInsert_ThenshouldPerformUpdateOperation()
@@ -199,7 +199,7 @@ namespace EmployeePayrollTest
         }
 
         /// <summary>
-        /// UC10 Givens the name of the employee names when in given range then return count by employee.
+        /// UC10 Given Query When Insert Then should Perform get Employee Data With Given Rang.
         /// </summary>
         [TestMethod]
         public void GivenQuery_WhenInsert_ThenshouldPerformgetEmployeeDataWithGivenRange()
@@ -208,6 +208,31 @@ namespace EmployeePayrollTest
             EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
             int count = employeePayrollRepo.getEmployeeDataWithGivenRange();
             Assert.AreEqual(expected, count);
+        }
+        
+        /// <summary>
+        /// UC11 Given Employee Payroll When Add New Employee Then should Return Expected Results
+        /// </summary>
+        [TestMethod]
+        public void GivenEmployeePayroll_WhenAddInTable_ThenshouldReturnExpectedResultss()
+        {
+            bool expected = true;
+            EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
+            EmployeeModel model = new EmployeeModel
+            {
+                EmployeeId = 92,
+                EmployeeName = "vidyadhar",
+                JobDescription = "Hr",
+                Month = "may",
+                EmployeeSalary = 25000,
+                SalaryId = 404,
+                StartDate = new DateTime(2015, 09, 12),
+                Gender = 'M',
+                CompanyId = 2,
+                DepartmentId = 3
+            };
+            bool result = employeePayrollRepo.addEmployeeToPayroll(model);
+            Assert.AreEqual(expected, result);
         }
     }
 }

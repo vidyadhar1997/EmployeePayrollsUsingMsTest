@@ -448,15 +448,5 @@ namespace EmployeePyrolls
                 this.sqlConnection.Close();
             }
         }
-        /*public bool DeleteDataFromTable()
-        {
-            using (this.sqlConnection)
-            {
-                string query = @"delete from EmplyeePayroll where id=3;";
-                SqlCommand cmd = new SqlCommand(query, this.sqlConnection);
-                int numberOfRowAffected=cmd.ExecuteNonQuery();
-
-            }
-        }*/
     }
 }
