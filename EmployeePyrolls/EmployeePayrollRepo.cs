@@ -448,5 +448,48 @@ namespace EmployeePyrolls
                 this.sqlConnection.Close();
             }
         }
+        
+        public int CheckEmployeeIsActive(EmployeeModel employeeModel)
+        {
+            int count = 0;
+            using (this.sqlConnection)
+            {
+                SqlCommand cmd = new SqlCommand("EmployeeActive", this.sqlConnection);
+                
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@EmployeeID", employeeModel.EmployeeId);
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader=cmd.ExecuteReader();
+                if (sqlDataReader.HasRows)
+                {
+                    while (sqlDataReader.Read())
+                    {
+                        employeeModel.EmployeeId = sqlDataReader.GetInt32(0);
+                        Console.WriteLine("{0}", employeeModel.EmployeeId);
+                        Console.WriteLine("\n");
+                    }
+                }
+                sqlDataReader.Close();
+                this.sqlConnection.Close();
+                string query = "@Select * from EmplyeePayroll where ='true'";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlDataReader sqlDataReader1 = sqlCommand.ExecuteReader();
+                if (sqlDataReader1.HasRows)
+                {
+                    while (sqlDataReader1.Read())
+                    {
+                        employeeModel.EmployeeId = sqlDataReader1.GetInt32(0);
+                        sqlDataReader1.GetBoolean(1);
+                        count++;
+                        Console.WriteLine("{0},{1}",employeeModel.EmployeeId, employeeModel.isEmployeeActive);
+                        Console.WriteLine("\n");
+
+                    }
+                }
+                sqlDataReader1.Close();
+                this.sqlConnection.Close();
+            }
+            return count;
+        }
     }
 }

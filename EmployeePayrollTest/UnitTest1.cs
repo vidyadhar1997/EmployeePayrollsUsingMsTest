@@ -234,5 +234,21 @@ namespace EmployeePayrollTest
             bool result = employeePayrollRepo.addEmployeeToPayroll(model);
             Assert.AreEqual(expected, result);
         }
+        
+        /// <summary>
+        /// Given Employee Payroll When Add New Employee Then should Return Expected Result
+        /// </summary>
+        [TestMethod]
+        public void GivenEmployeePayroll_WhenAddInTable_ThenshouldReturnExpectedResultds()
+        {
+            int expected = 13;
+            EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
+            EmployeeModel model = new EmployeeModel
+            {
+                EmployeeId = 1,
+            };
+            int result = employeePayrollRepo.CheckEmployeeIsActive(model);
+            Assert.AreEqual(expected, result);
+        }
     }
 }

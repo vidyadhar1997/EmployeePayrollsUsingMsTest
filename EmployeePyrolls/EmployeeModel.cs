@@ -16,5 +16,6 @@ namespace EmployeePyrolls
         public char Gender { get; set; }
         public int DepartmentId { get; set; }
         public int CompanyId { get; set; }
+        public bool isEmployeeActive { get; set;}
 }
 }
