@@ -114,6 +114,38 @@ namespace EmployeePyrolls
                 throw new Exception(e.Message);
             }
         }
+        
+        /// <summary>
+        /// Updates the employee salary.
+        /// </summary>
+        /// <param name="employeeModel">The employee model.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public int updateEmployeeSalary(EmployeeModel employeeModel)
+        {
+            try
+            {
+                using (this.sqlConnection)
+                {
+                    SqlCommand cmd = new SqlCommand("spUpdateEmpSalarys", this.sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EmployeeName", employeeModel.EmployeeName);
+                    cmd.Parameters.AddWithValue("@EmployeeSalary", employeeModel.EmployeeSalary);
+                    this.sqlConnection.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    this.sqlConnection.Close();
+                }
+                return employeeModel.EmployeeSalary;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.sqlConnection.Close();
+            }
+        }
 
         /// <summary>
         /// Gets the employee data with given range.

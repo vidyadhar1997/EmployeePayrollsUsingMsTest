@@ -90,12 +90,33 @@ namespace EmployeePayrollTest
             DateTime startTimesForDb = DateTime.Now;
             employeePayrollRepo.addEmployeeToPayroll(employeeModel);
             DateTime endTimesForDb = DateTime.Now;
-            Console.WriteLine("Durations without the thread for payroll = " + (startTimesForDb - endTimesForDb));
+            Console.WriteLine("Duration for insertion in payroll = " + (startTimesForDb - endTimesForDb));
 
             DateTime startTimeWithThread = DateTime.Now;
             employeePayroll.addEmployeeToPayrollWithThread(emploeeModellist);
             DateTime endTimeWithThread = DateTime.Now;
             Console.WriteLine("Durations with the thread = " + (startTimeWithThread - endTimeWithThread));
         }
+        
+        [TestMethod]
+        public void givenListAndDbss_WhenInsertInPayrollTable_ThenCalculateExacutionTimes()
+        {
+            
+            EmployeePayrollOperation employeePayroll = new EmployeePayrollOperation();
+            EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
+            EmployeeModel employeeModel = new EmployeeModel
+            {
+               EmployeeName="Prem",
+               EmployeeSalary=65000
+            };
+
+            DateTime startTimesForDb = DateTime.Now;
+            employeePayrollRepo.updateEmployeeSalary(employeeModel);
+            DateTime endTimesForDb = DateTime.Now;
+            Console.WriteLine("Durations for updation in data base = " + (startTimesForDb - endTimesForDb));
+
+          
+        }
     }
 }
+
