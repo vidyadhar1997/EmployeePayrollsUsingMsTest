@@ -359,7 +359,7 @@ namespace EmployeePyrolls
         {
             try
             {
-                using (this.sqlConnection)
+                using (this.sqlConnection) 
                 {
                     SqlCommand cmd = new SqlCommand("SpAddEmployeePayrollDetails", this.sqlConnection);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -416,6 +416,7 @@ namespace EmployeePyrolls
                 cmd.Parameters.AddWithValue("@Gender", employeeModel.Gender);
                 cmd.Parameters.AddWithValue("@DepartmentId", employeeModel.DepartmentId);
                 cmd.Parameters.AddWithValue("@CompanyId", employeeModel.CompanyId);
+                cmd.Parameters.AddWithValue("isEmployeeActive", employeeModel.isEmployeeActive);
                 this.sqlConnection.Open();
                 cmd.ExecuteNonQuery();
                 this.sqlConnection.Close();
