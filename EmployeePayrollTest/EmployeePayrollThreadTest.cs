@@ -23,12 +23,12 @@ namespace EmployeePayrollTest
             DateTime startTime = DateTime.Now;
             employeePayroll.addEmployeeToPayroll(emploeeModellist);
             DateTime endTime = DateTime.Now;
-            Console.WriteLine("Durations without thread = " + (endTime - startTime));
+            Console.WriteLine("Durations without the thread = " + (endTime - startTime));
             EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
             EmployeeModel employeeModel = new EmployeeModel
             {
-                EmployeeId = 78,
-                EmployeeName = "suraj",
+                EmployeeId = 100,
+                EmployeeName = "akash",
                 JobDescription = "sale",
                 Month = "nov",
                 EmployeeSalary = 67000,
@@ -43,12 +43,12 @@ namespace EmployeePayrollTest
             DateTime startTimeForDb = DateTime.Now;
             employeePayrollRepo.addEmployee(employeeModel);
             DateTime endTimeForDb = DateTime.Now;
-            Console.WriteLine("Durations without thread = " + (startTimeForDb - endTimeForDb));
+            Console.WriteLine("Durations without the thread = " + (startTimeForDb - endTimeForDb));
             
             DateTime startTimeWithThread = DateTime.Now;
             employeePayroll.addEmployeeToPayrollWithThread(emploeeModellist);
             DateTime endTimeWithThread = DateTime.Now;
-            Console.WriteLine("Durations with thread = " + (startTimeWithThread - endTimeWithThread));
+            Console.WriteLine("Durations with the thread = " + (startTimeWithThread - endTimeWithThread));
 
 
         }
