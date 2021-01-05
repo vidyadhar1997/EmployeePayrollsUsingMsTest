@@ -371,6 +371,9 @@ namespace EmployeePyrolls
                     cmd.Parameters.AddWithValue("@SalaryId", employeeModel.SalaryId);
                     cmd.Parameters.AddWithValue("@StartDate", employeeModel.StartDate);
                     cmd.Parameters.AddWithValue("@Gender", employeeModel.Gender);
+                    cmd.Parameters.AddWithValue("@DepartmentId", employeeModel.DepartmentId);
+                    cmd.Parameters.AddWithValue("@CompanyId", employeeModel.CompanyId);
+                    cmd.Parameters.AddWithValue("isEmployeeActive", employeeModel.isEmployeeActive);
                     this.sqlConnection.Open();
                     var result = cmd.ExecuteNonQuery();
                     this.sqlConnection.Close();
