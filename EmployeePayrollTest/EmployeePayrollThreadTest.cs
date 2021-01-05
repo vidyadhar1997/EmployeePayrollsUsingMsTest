@@ -27,18 +27,17 @@ namespace EmployeePayrollTest
             EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
             EmployeeModel employeeModel = new EmployeeModel
             {
-                EmployeeId = 100,
-                EmployeeName = "akash",
-                JobDescription = "sale",
-                Month = "nov",
-                EmployeeSalary = 67000,
+                EmployeeId = 101,
+                EmployeeName = "amol",
+                JobDescription = "Hr",
+                Month = "oct",
+                EmployeeSalary = 77000,
                 SalaryId = 101,
-                StartDate = new DateTime(2019, 02, 22),
+                StartDate = new DateTime(2018, 02, 22),
                 Gender = 'M',
                 DepartmentId = 3,
                 CompanyId = 2,
                 isEmployeeActive = true
-
             };
             DateTime startTimeForDb = DateTime.Now;
             employeePayrollRepo.addEmployee(employeeModel);
