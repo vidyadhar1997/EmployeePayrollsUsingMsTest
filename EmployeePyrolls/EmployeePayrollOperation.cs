@@ -34,5 +34,21 @@ namespace EmployeePyrolls
             employeeModelList.Add(employeeData);
 
         }
+
+        public void addEmployeeToPayrollWithThread(List<EmployeeModel> employeelist)
+        {
+            employeelist.ForEach(employeeData =>
+            {
+                Task thread = new Task(() =>
+                {
+                    Console.WriteLine("Employee being added = " + employeeData.EmployeeName);
+                    this.addEmployeeToPayroll(employeeData);
+                    Console.WriteLine("Employee added =" + employeeData.EmployeeName);
+                });
+
+                thread.Start();
+            });
+            Console.WriteLine(this.employeeModelList.Count);
+        }
     }
 }

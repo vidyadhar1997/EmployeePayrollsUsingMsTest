@@ -27,22 +27,29 @@ namespace EmployeePayrollTest
             EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
             EmployeeModel employeeModel = new EmployeeModel
             {
-                EmployeeId = 81,
-                EmployeeName = "dhiraj",
-                JobDescription = "hr",
-                Month = "may",
+                EmployeeId = 78,
+                EmployeeName = "suraj",
+                JobDescription = "sale",
+                Month = "nov",
                 EmployeeSalary = 67000,
                 SalaryId = 101,
                 StartDate = new DateTime(2019, 02, 22),
+                Gender = 'M',
                 DepartmentId = 3,
                 CompanyId = 2,
                 isEmployeeActive = true
 
             };
-            DateTime startTimes = DateTime.Now;
+            DateTime startTimeForDb = DateTime.Now;
             employeePayrollRepo.addEmployee(employeeModel);
-            DateTime endTimes = DateTime.Now;
-            Console.WriteLine("Duration without thread = " + (endTimes - startTimes));
+            DateTime endTimeForDb = DateTime.Now;
+            Console.WriteLine("Duration without thread = " + (startTimeForDb - endTimeForDb));
+            
+            DateTime startTimeWithThread = DateTime.Now;
+            employeePayroll.addEmployeeToPayrollWithThread(emploeeModellist);
+            DateTime endTimeWithThread = DateTime.Now;
+            Console.WriteLine("Duration with thread = " + (startTimeWithThread - endTimeWithThread));
+
 
         }
     }
