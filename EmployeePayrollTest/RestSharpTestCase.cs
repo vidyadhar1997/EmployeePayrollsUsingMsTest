@@ -72,13 +72,16 @@ namespace RestSharpTestCase
             jObjectBody.Add("Salary", "14748");
             request.AddParameter("application/json", jObjectBody, ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
-            Assert.AreEqual(response.StatusCode,HttpStatusCode.Created);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.Created);
             Employee dataResorce = JsonConvert.DeserializeObject<Employee>(response.Content);
             Assert.AreEqual("max", dataResorce.name);
             Assert.AreEqual("14748", dataResorce.Salary);
-            System.Console.WriteLine(response.Content);
+            Console.WriteLine(response.Content);
         }
 
+        /// <summary>
+        /// Givens the multiple employee when on post then should return employee list.
+        /// </summary>
         [TestMethod]
         public void GivenMultipleEmployee_WhenOnPost_ThenShouldReturnEmployeeList()
         {
@@ -94,16 +97,35 @@ namespace RestSharpTestCase
                 jObjectBody.Add("Salary", employeeData.Salary);
                 request.AddParameter("application/json", jObjectBody, ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
-                Assert.AreEqual(response.StatusCode, System.Net.HttpStatusCode.Created);
+                Assert.AreEqual(response.StatusCode, HttpStatusCode.Created);
                 Employee dataResorce = JsonConvert.DeserializeObject<Employee>(response.Content);
                 Assert.AreEqual(employeeData.name, dataResorce.name);
                 Assert.AreEqual(employeeData.Salary, dataResorce.Salary);
-                System.Console.WriteLine(response.Content);
+                Console.WriteLine(response.Content);
             });
             IRestResponse response = getEmployeeList();
             Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
             List<Employee> dataResorce = JsonConvert.DeserializeObject<List<Employee>>(response.Content);
             Assert.AreEqual(8, dataResorce.Count);
+        }
+        
+        /// <summary>
+        /// Given the employee when update salary then should return updated employee salary.
+        /// </summary>
+        [TestMethod]
+        public void GivenEmployee_WhenUpdateSalary_ThenShouldReturnUpdatedEmployeeSalary()
+        {
+            RestRequest request = new RestRequest("/employee/4", Method.PUT);
+            JObject jObjectBody = new JObject();
+            jObjectBody.Add("name", "suraj");
+            jObjectBody.Add("Salary","65000");
+            request.AddParameter("application/json", jObjectBody, ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
+            Employee dataResorce = JsonConvert.DeserializeObject<Employee>(response.Content);
+            Assert.AreEqual("suraj", dataResorce.name);
+            Assert.AreEqual("65000", dataResorce.Salary);
+            Console.WriteLine(response.Content);
         }
     }
 }
