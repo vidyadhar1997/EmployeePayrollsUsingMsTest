@@ -108,7 +108,7 @@ namespace RestSharpTestCase
             List<Employee> dataResorce = JsonConvert.DeserializeObject<List<Employee>>(response.Content);
             Assert.AreEqual(8, dataResorce.Count);
         }
-        
+
         /// <summary>
         /// Given the employee when update salary then should return updated employee salary.
         /// </summary>
@@ -118,13 +118,25 @@ namespace RestSharpTestCase
             RestRequest request = new RestRequest("/employee/4", Method.PUT);
             JObject jObjectBody = new JObject();
             jObjectBody.Add("name", "suraj");
-            jObjectBody.Add("Salary","65000");
+            jObjectBody.Add("Salary", "65000");
             request.AddParameter("application/json", jObjectBody, ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
             Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
             Employee dataResorce = JsonConvert.DeserializeObject<Employee>(response.Content);
             Assert.AreEqual("suraj", dataResorce.name);
             Assert.AreEqual("65000", dataResorce.Salary);
+            Console.WriteLine(response.Content);
+        }
+       
+        /// <summary>
+        /// Givens the employee identifier when on delete then should return success status.
+        /// </summary>
+        [TestMethod]
+        public void GivenEmployeeId_WhenOnDelete_ThenShouldReturnSuccessStatus()
+        {
+            RestRequest request = new RestRequest("/employee/5", Method.DELETE);
+            IRestResponse response = client.Execute(request);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
             Console.WriteLine(response.Content);
         }
     }
