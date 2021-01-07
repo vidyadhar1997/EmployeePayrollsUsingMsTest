@@ -30,7 +30,7 @@ namespace EmployeePayrollTest
             EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
             EmployeeModel employeeModel = new EmployeeModel
             {
-                EmployeeId = 108,
+                EmployeeId = 109,
                 EmployeeName = "amol",
                 JobDescription = "Hr",
                 Month = "oct",
@@ -98,11 +98,12 @@ namespace EmployeePayrollTest
             Console.WriteLine("Durations with the thread = " + (startTimeWithThread - endTimeWithThread));
         }
         
+        /// <summary>
+        /// given data base when update then calculate execution time.
+        /// </summary>
         [TestMethod]
-        public void givenListAndDbss_WhenInsertInPayrollTable_ThenCalculateExacutionTimes()
+        public void givenDb_WhenUpdateSalary_ThenCalaculateExecutionTime()
         {
-            
-            EmployeePayrollOperation employeePayroll = new EmployeePayrollOperation();
             EmployeePayrollRepo employeePayrollRepo = new EmployeePayrollRepo();
             EmployeeModel employeeModel = new EmployeeModel
             {
@@ -114,8 +115,6 @@ namespace EmployeePayrollTest
             employeePayrollRepo.updateEmployeeSalary(employeeModel);
             DateTime endTimesForDb = DateTime.Now;
             Console.WriteLine("Durations for updation in data base = " + (startTimesForDb - endTimesForDb));
-
-          
         }
     }
 }

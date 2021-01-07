@@ -34,7 +34,11 @@ namespace EmployeePyrolls
             employeeModelList.Add(employeeData);
 
         }
-
+       
+        /// <summary>
+        /// Adds the employee to payroll with thread.
+        /// </summary>
+        /// <param name="employeelist">The employeelist.</param>
         public void addEmployeeToPayrollWithThread(List<EmployeeModel> employeelist)
         {
             employeelist.ForEach(employeeData =>
