@@ -56,7 +56,7 @@ namespace RestSharpTestCase
             Assert.AreEqual(8, dataResorce.Count);
             foreach (Employee e in dataResorce)
             {
-                System.Console.WriteLine("id,: " + e.id + ",name:" + e.name + ",Salary:" + e.Salary);
+                Console.WriteLine("id,: " + e.id + ",name:" + e.name + ",Salary:" + e.Salary);
             }
         }
 
@@ -96,17 +96,16 @@ namespace RestSharpTestCase
                 jObjectBody.Add("name", employeeData.name);
                 jObjectBody.Add("Salary", employeeData.Salary);
                 request.AddParameter("application/json", jObjectBody, ParameterType.RequestBody);
-                IRestResponse response = client.Execute(request);
-                Assert.AreEqual(response.StatusCode, HttpStatusCode.Created);
-                Employee dataResorce = JsonConvert.DeserializeObject<Employee>(response.Content);
-                Assert.AreEqual(employeeData.name, dataResorce.name);
-                Assert.AreEqual(employeeData.Salary, dataResorce.Salary);
-                Console.WriteLine(response.Content);
+                client.Execute(request);
             });
             IRestResponse response = getEmployeeList();
             Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
             List<Employee> dataResorce = JsonConvert.DeserializeObject<List<Employee>>(response.Content);
-            Assert.AreEqual(8, dataResorce.Count);
+            Assert.AreEqual(5, dataResorce.Count);
+            foreach (Employee e in dataResorce)
+            {
+                System.Console.WriteLine("id,: " + e.id + ",name:" + e.name + ",Salary:" + e.Salary);
+            }
         }
 
         /// <summary>
@@ -134,7 +133,7 @@ namespace RestSharpTestCase
         [TestMethod]
         public void GivenEmployeeId_WhenOnDelete_ThenShouldReturnSuccessStatus()
         {
-            RestRequest request = new RestRequest("/employee/5", Method.DELETE);
+            RestRequest request = new RestRequest("/employee/4", Method.DELETE);
             IRestResponse response = client.Execute(request);
             Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
             Console.WriteLine(response.Content);
